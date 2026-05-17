@@ -1,4 +1,3 @@
-
 // CeasaGUI.cpp : Defines the class behaviors for the application.
 //
 
@@ -9,24 +8,19 @@
 #include "CeasaGUI.h"
 #include "MainFrm.h"
 
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
-
 // CCeasaApp
 
 BEGIN_MESSAGE_MAP(CCeasaApp, CWinApp)
-	ON_COMMAND(ID_APP_ABOUT, &CCeasaApp::OnAppAbout)
+ON_COMMAND(ID_APP_ABOUT, &CCeasaApp::OnAppAbout)
 END_MESSAGE_MAP()
-
 
 // CCeasaApp construction
 
-CCeasaApp::CCeasaApp() noexcept
-{
-
+CCeasaApp::CCeasaApp() noexcept {
 	// TODO: replace application ID string below with unique ID string; recommended
 	// format for string is CompanyName.ProductName.SubProduct.VersionInformation
 	SetAppID(_T("CeasaGUI.AppID.NoVersion"));
@@ -39,13 +33,10 @@ CCeasaApp::CCeasaApp() noexcept
 
 CCeasaApp theApp;
 
-
 // CCeasaApp initialization
 
-BOOL CCeasaApp::InitInstance()
-{
+BOOL CCeasaApp::InitInstance() {
 	CWinApp::InitInstance();
-
 
 	EnableTaskbarInteraction(FALSE);
 
@@ -61,21 +52,13 @@ BOOL CCeasaApp::InitInstance()
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
-
 	// To create the main window, this code creates a new frame window
 	// object and then sets it as the application's main window object
-	CFrameWnd* pFrame = new CMainFrame;
-	if (!pFrame)
-		return FALSE;
+	CFrameWnd *pFrame = new CMainFrame;
+	if (!pFrame) return FALSE;
 	m_pMainWnd = pFrame;
 	// create and load the frame with its resources
-	pFrame->LoadFrame(IDR_MAINFRAME,
-		WS_OVERLAPPEDWINDOW | FWS_ADDTOTITLE, nullptr,
-		nullptr);
-
-
-
-
+	pFrame->LoadFrame(IDR_MAINFRAME, WS_OVERLAPPEDWINDOW | FWS_ADDTOTITLE, nullptr, nullptr);
 
 	// The one and only window has been initialized, so show and update it
 	pFrame->ShowWindow(SW_SHOW);
@@ -83,20 +66,17 @@ BOOL CCeasaApp::InitInstance()
 	return TRUE;
 }
 
-int CCeasaApp::ExitInstance()
-{
-	//TODO: handle additional resources you may have added
+int CCeasaApp::ExitInstance() {
+	// TODO: handle additional resources you may have added
 	return CWinApp::ExitInstance();
 }
 
 // CCeasaApp message handlers
 
-
 // CAboutDlg dialog used for App About
 
-class CAboutDlg : public CDialogEx
-{
-public:
+class CAboutDlg : public CDialogEx {
+   public:
 	CAboutDlg() noexcept;
 
 // Dialog Data
@@ -104,34 +84,25 @@ public:
 	enum { IDD = IDD_ABOUTBOX };
 #endif
 
-protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+   protected:
+	virtual void DoDataExchange(CDataExchange *pDX); // DDX/DDV support
 
-// Implementation
-protected:
+	// Implementation
+   protected:
 	DECLARE_MESSAGE_MAP()
 };
 
-CAboutDlg::CAboutDlg() noexcept : CDialogEx(IDD_ABOUTBOX)
-{
-}
+CAboutDlg::CAboutDlg() noexcept : CDialogEx(IDD_ABOUTBOX) {}
 
-void CAboutDlg::DoDataExchange(CDataExchange* pDX)
-{
-	CDialogEx::DoDataExchange(pDX);
-}
+void CAboutDlg::DoDataExchange(CDataExchange *pDX) { CDialogEx::DoDataExchange(pDX); }
 
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 // App command to run the dialog
-void CCeasaApp::OnAppAbout()
-{
+void CCeasaApp::OnAppAbout() {
 	CAboutDlg aboutDlg;
 	aboutDlg.DoModal();
 }
 
 // CCeasaApp message handlers
-
-
-
