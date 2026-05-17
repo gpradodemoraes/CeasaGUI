@@ -61,6 +61,10 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 
 	SetWindowPos(nullptr, x, y, windowWidth, windowHeight, SWP_NOZORDER);
 
+	HICON hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	SetIcon(hIcon, TRUE);
+	SetIcon(hIcon, FALSE);
+
 	return 0;
 }
 
