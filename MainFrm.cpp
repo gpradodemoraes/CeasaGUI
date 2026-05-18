@@ -1,4 +1,4 @@
-// MainFrm.cpp : implementation of the CMainFrame class
+﻿// MainFrm.cpp : implementation of the CMainFrame class
 //
 
 #include "pch.h"
@@ -10,6 +10,8 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
+#include <tchar.h>
+#include <Windows.h>
 
 // CMainFrame
 
@@ -34,7 +36,7 @@ CMainFrame::CMainFrame() noexcept {
 	// TODO: add member initialization code here
 }
 
-void CMainFrame::OnCalcularSomas() { MessageBox(L"Entre aqui com os números!", L"Calcular Somas áéíóú", MB_OK); }
+void CMainFrame::OnCalcularSomas() { MessageBoxW(_T("Entre aqui com os números!"), _T("Calcular Somas áéíóú"), MB_OK); }
 
 CMainFrame::~CMainFrame() {}
 
