@@ -18,6 +18,7 @@ IMPLEMENT_DYNAMIC(CMainFrame, CFrameWnd)
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 ON_WM_CREATE()
 ON_WM_SETFOCUS()
+ON_COMMAND(ID_CALCULAR_SOMAS, &CMainFrame::OnCalcularSomas)
 END_MESSAGE_MAP()
 
 static UINT indicators[] = {
@@ -32,6 +33,8 @@ static UINT indicators[] = {
 CMainFrame::CMainFrame() noexcept {
 	// TODO: add member initialization code here
 }
+
+void CMainFrame::OnCalcularSomas() { MessageBox(L"Entre aqui com os números!", L"Calcular Somas áéíóú", MB_OK); }
 
 CMainFrame::~CMainFrame() {}
 
@@ -62,6 +65,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	SetWindowPos(nullptr, x, y, windowWidth, windowHeight, SWP_NOZORDER);
 
 	HICON hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_hAccel = ::LoadAccelerators(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDR_MAINFRAME));
+
 	SetIcon(hIcon, TRUE);
 	SetIcon(hIcon, FALSE);
 
