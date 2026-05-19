@@ -9,6 +9,7 @@ class CMainFrame : public CFrameWnd {
 	HACCEL m_hAccel;
 	CMainFrame() noexcept;
 	afx_msg void OnCalcularSomas();
+	afx_msg void OnShowHelp();
 
    protected:
 	DECLARE_DYNAMIC(CMainFrame)

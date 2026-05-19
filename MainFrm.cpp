@@ -21,6 +21,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 ON_WM_CREATE()
 ON_WM_SETFOCUS()
 ON_COMMAND(ID_CALCULAR_SOMAS, &CMainFrame::OnCalcularSomas)
+ON_COMMAND(ID_SHOW_HELP, &CMainFrame::OnShowHelp)
 END_MESSAGE_MAP()
 
 static UINT indicators[] = {
@@ -37,6 +38,8 @@ CMainFrame::CMainFrame() noexcept {
 }
 
 void CMainFrame::OnCalcularSomas() { MessageBoxW(_T("Entre aqui com os números!"), _T("Calcular Somas áéíóú"), MB_OK); }
+
+void CMainFrame::OnShowHelp() { MessageBoxW(_T("Mostrar HELP! óú"), _T("HELP áéí"), MB_OK); }
 
 CMainFrame::~CMainFrame() {}
 
