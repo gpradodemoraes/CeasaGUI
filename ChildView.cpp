@@ -12,12 +12,11 @@
 
 // CChildView
 
-CChildView::CChildView() {}
+CChildView::CChildView() { show_help = FALSE; }
 
 void CChildView::drawHelp() {
-	CDC *pDC = this->GetDC();
-	pDC->MoveTo(10, 22);
-	pDC->LineTo(155, 64);
+	show_help = !show_help;
+	Invalidate();
 }
 
 CChildView::~CChildView() {}
@@ -45,4 +44,8 @@ void CChildView::OnPaint() {
 	// TODO: Add your message handler code here
 
 	// Do not call CWnd::OnPaint() for painting messages
+	if (show_help) {
+		dc.MoveTo(10, 22);
+		dc.LineTo(155, 64);
+	}
 }

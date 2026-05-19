@@ -26,5 +26,8 @@ class CChildView : public CWnd {
 	// Generated message map functions
    protected:
 	afx_msg void OnPaint();
+
+   private:
+	BOOL show_help;
 	DECLARE_MESSAGE_MAP()
 };
