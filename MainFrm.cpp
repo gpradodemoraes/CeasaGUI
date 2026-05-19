@@ -39,7 +39,11 @@ CMainFrame::CMainFrame() noexcept {
 
 void CMainFrame::OnCalcularSomas() { MessageBoxW(_T("Entre aqui com os números!"), _T("Calcular Somas áéíóú"), MB_OK); }
 
-void CMainFrame::OnShowHelp() { MessageBoxW(_T("Mostrar HELP! óú"), _T("HELP áéí"), MB_OK); }
+void CMainFrame::OnShowHelp() {
+	// MessageBoxW(_T("Mostrar HELP! óú"), _T("HELP áéí"), MB_OK);
+
+	m_wndView.drawHelp();
+}
 
 CMainFrame::~CMainFrame() {}
 

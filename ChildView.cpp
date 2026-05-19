@@ -1,4 +1,4 @@
-// ChildView.cpp : implementation of the CChildView class
+﻿// ChildView.cpp : implementation of the CChildView class
 //
 
 #include "pch.h"
@@ -13,6 +13,12 @@
 // CChildView
 
 CChildView::CChildView() {}
+
+void CChildView::drawHelp() {
+	CDC *pDC = this->GetDC();
+	pDC->MoveTo(10, 22);
+	pDC->LineTo(155, 64);
+}
 
 CChildView::~CChildView() {}
 

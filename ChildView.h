@@ -1,4 +1,4 @@
-// ChildView.h : interface of the CChildView class
+﻿// ChildView.h : interface of the CChildView class
 //
 
 #pragma once
@@ -9,6 +9,7 @@ class CChildView : public CWnd {
 	// Construction
    public:
 	CChildView();
+	void drawHelp();
 
 	// Attributes
    public:
