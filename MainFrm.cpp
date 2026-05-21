@@ -12,6 +12,7 @@
 #endif
 #include <tchar.h>
 #include <Windows.h>
+#include "CCalcularSomasDialog.h"
 
 // CMainFrame
 
@@ -22,6 +23,7 @@ ON_WM_CREATE()
 ON_WM_SETFOCUS()
 ON_COMMAND(ID_CALCULAR_SOMAS, &CMainFrame::OnCalcularSomas)
 ON_COMMAND(ID_SHOW_HELP, &CMainFrame::OnShowHelp)
+ON_MESSAGE(WM_CALCULAR_SOMAS_CLOSED, &CMainFrame::OnCalcularSomasClosed)
 END_MESSAGE_MAP()
 
 static UINT indicators[] = {
@@ -35,9 +37,18 @@ static UINT indicators[] = {
 
 CMainFrame::CMainFrame() noexcept {
 	// TODO: add member initialization code here
+	// m_pCalcDlg = new CCalcularSomasDialog(this);
 }
 
-void CMainFrame::OnCalcularSomas() { MessageBoxW(_T("Entre aqui com os números!"), _T("Calcular Somas áéíóú"), MB_OK); }
+void CMainFrame::OnCalcularSomas() {
+	// MessageBoxW(_T("Entre aqui com os números!"), _T("Calcular Somas áéíóú"), MB_OK);
+	if (m_pCalcDlg == nullptr) {
+		m_pCalcDlg = new CCalcularSomasDialog(this);
+		m_pCalcDlg->Create(IDD_SOMA_FORMVIEW, this);
+	}
+	m_pCalcDlg->ShowWindow(SW_SHOW);
+	m_pCalcDlg->SetForegroundWindow();
+}
 
 void CMainFrame::OnShowHelp() {
 	// MessageBoxW(_T("Mostrar HELP! óú"), _T("HELP áéí"), MB_OK);
@@ -45,7 +56,13 @@ void CMainFrame::OnShowHelp() {
 	m_wndView.drawHelp();
 }
 
-CMainFrame::~CMainFrame() {}
+CMainFrame::~CMainFrame() {
+	if (m_pCalcDlg != nullptr) {
+		m_pCalcDlg->DestroyWindow(); // triggers OnDestroy in the dialog
+		delete m_pCalcDlg;
+		m_pCalcDlg = nullptr;
+	}
+}
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1) return -1;
@@ -108,6 +125,12 @@ void CMainFrame::Dump(CDumpContext &dc) const { CFrameWnd::Dump(dc); }
 void CMainFrame::OnSetFocus(CWnd * /*pOldWnd*/) {
 	// forward focus to the view window
 	m_wndView.SetFocus();
+}
+
+LRESULT CMainFrame::OnCalcularSomasClosed(WPARAM wParam, LPARAM lParam) {
+	delete m_pCalcDlg;
+	m_pCalcDlg = nullptr;
+	return 0;
 }
 
 BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void *pExtra, AFX_CMDHANDLERINFO *pHandlerInfo) {

@@ -1,4 +1,4 @@
-// CeasaGUI.cpp : Defines the class behaviors for the application.
+﻿// CeasaGUI.cpp : Defines the class behaviors for the application.
 //
 
 #include "pch.h"
@@ -11,6 +11,7 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
+#include "resource.h"
 
 // CCeasaApp
 
@@ -36,6 +37,8 @@ CCeasaApp theApp;
 // CCeasaApp initialization
 
 BOOL CCeasaApp::InitInstance() {
+	afxTraceEnabled = TRUE;
+	afxTraceFlags = traceAppMsg;
 	CWinApp::InitInstance();
 
 	EnableTaskbarInteraction(FALSE);
@@ -61,6 +64,7 @@ BOOL CCeasaApp::InitInstance() {
 	pFrame->LoadFrame(IDR_MAINFRAME, WS_OVERLAPPEDWINDOW | FWS_ADDTOTITLE, nullptr, nullptr);
 
 	// The one and only window has been initialized, so show and update it
+	ASSERT(::IsWindow(pFrame->m_hWnd));
 	pFrame->ShowWindow(SW_SHOW);
 	pFrame->UpdateWindow();
 	return TRUE;

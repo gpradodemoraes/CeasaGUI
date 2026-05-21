@@ -1,0 +1,22 @@
+﻿#pragma once
+#include "afxdialogex.h"
+
+// CCalcularSomasDialog dialog
+
+class CCalcularSomasDialog : public CDialogEx {
+	DECLARE_DYNAMIC(CCalcularSomasDialog)
+
+   public:
+	CCalcularSomasDialog(CWnd *pParent = nullptr); // standard constructor
+	virtual ~CCalcularSomasDialog();
+
+// Dialog Data
+#ifdef AFX_DESIGN_TIME
+	enum { IDD = IDD_SOMA_FORMVIEW };
+#endif
+
+   protected:
+	virtual void DoDataExchange(CDataExchange *pDX); // DDX/DDV support
+	afx_msg void OnDestroy();
+	DECLARE_MESSAGE_MAP()
+};
