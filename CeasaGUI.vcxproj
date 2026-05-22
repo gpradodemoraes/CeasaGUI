@@ -185,6 +185,7 @@
   <ItemGroup>
     <ClInclude Include="CeasaGUI.h" />
     <ClInclude Include="ChildView.h" />
+    <ClInclude Include="CPersonFormView.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="pch.h" />
@@ -194,6 +195,7 @@
   <ItemGroup>
     <ClCompile Include="CeasaGUI.cpp" />
     <ClCompile Include="ChildView.cpp" />
+    <ClCompile Include="CPersonFormView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

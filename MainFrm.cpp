@@ -12,6 +12,7 @@
 #endif
 #include <tchar.h>
 #include <Windows.h>
+#include "CPersonFormView.h"
 
 // CMainFrame
 
@@ -79,6 +80,17 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 	SetIcon(hIcon, TRUE);
 	SetIcon(hIcon, FALSE);
 
+	// coco
+	CRect rect;
+	GetClientRect(&rect);
+
+	// Create the form view directly
+	m_pPersonFormView = new CPersonFormView();
+	m_pPersonFormView->Create(NULL, NULL, WS_CHILD | WS_VISIBLE, rect, this,
+							  AFX_IDW_PANE_FIRST, // ← This ID is required for CFormView
+							  NULL);
+	// coco
+
 	return 0;
 }
 
@@ -116,4 +128,12 @@ BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void *pExtra, AFX_CMDHANDLERINFO 
 
 	// otherwise, do default handling
 	return CFrameWnd::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
+}
+
+void CMainFrame::OnSize(UINT nType, int cx, int cy) {
+	CFrameWnd::OnSize(nType, cx, cy);
+
+	if (m_pPersonFormView && m_pPersonFormView->GetSafeHwnd()) {
+		m_pPersonFormView->MoveWindow(0, 0, cx, cy);
+	}
 }

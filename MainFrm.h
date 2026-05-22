@@ -1,8 +1,9 @@
-// MainFrm.h : interface of the CMainFrame class
+﻿// MainFrm.h : interface of the CMainFrame class
 //
 
 #pragma once
 #include "ChildView.h"
+#include "CPersonFormView.h"
 
 class CMainFrame : public CFrameWnd {
    public:
@@ -23,6 +24,8 @@ class CMainFrame : public CFrameWnd {
 	virtual BOOL PreCreateWindow(CREATESTRUCT &cs);
 	virtual BOOL OnCmdMsg(UINT nID, int nCode, void *pExtra, AFX_CMDHANDLERINFO *pHandlerInfo);
 
+	virtual void OnSize(UINT nType, int cx, int cy);
+
 	// Implementation
    public:
 	virtual ~CMainFrame();
@@ -34,6 +37,7 @@ class CMainFrame : public CFrameWnd {
    protected: // control bar embedded members
 	CStatusBar m_wndStatusBar;
 	CChildView m_wndView;
+	CPersonFormView *m_pPersonFormView = nullptr;
 
 	// Generated message map functions
    protected:
