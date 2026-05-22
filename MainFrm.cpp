@@ -54,6 +54,7 @@ void CMainFrame::OnShowHelp() {
 	// MessageBoxW(_T("Mostrar HELP! óú"), _T("HELP áéí"), MB_OK);
 
 	m_wndView.drawHelp();
+	// m_pCalcDlg->PostMessageW(WM_CLOSE);
 }
 
 CMainFrame::~CMainFrame() {
@@ -92,9 +93,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct) {
 
 	HICON hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 	m_hAccel = ::LoadAccelerators(AfxGetInstanceHandle(), MAKEINTRESOURCE(IDR_MAINFRAME));
-
 	SetIcon(hIcon, TRUE);
-	SetIcon(hIcon, FALSE);
 
 	return 0;
 }

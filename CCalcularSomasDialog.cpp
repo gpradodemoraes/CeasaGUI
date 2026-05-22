@@ -24,8 +24,22 @@ void CCalcularSomasDialog::OnDestroy() {
 	if (GetParent()) GetParent()->PostMessage(WM_CALCULAR_SOMAS_CLOSED);
 }
 
+void CCalcularSomasDialog::OnLButtonDown(UINT nFlags, CPoint point) {
+	MessageBoxW(_T("Mostrar HELP! óú"), _T("HELP áéí"), MB_OK);
+	this->PostMessageW(WM_CLOSE);
+}
+
+void CCalcularSomasDialog::OnOK() {}
+
 BEGIN_MESSAGE_MAP(CCalcularSomasDialog, CDialogEx)
 ON_WM_DESTROY()
+ON_WM_LBUTTONDOWN()
+ON_BN_CLICKED(IDC_BUTTON_CALCULA_SOMAS, &CCalcularSomasDialog::OnBnClickedButtonCalculaSomas)
 END_MESSAGE_MAP()
 
 // CCalcularSomasDialog message handlers
+
+void CCalcularSomasDialog::OnBnClickedButtonCalculaSomas() {
+	MessageBoxW(_T("Botão Calcular Somas"), _T("Calcular Somas apertado!"), MB_OK);
+	DestroyWindow();
+}
