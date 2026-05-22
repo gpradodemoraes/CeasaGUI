@@ -18,8 +18,10 @@ class CCalcularSomasDialog : public CDialogEx {
    protected:
 	virtual void DoDataExchange(CDataExchange *pDX); // DDX/DDV support
 	afx_msg void OnDestroy();
-	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	virtual void OnOK() override;
+	virtual void OnCancel() override;
+	virtual BOOL CCalcularSomasDialog::PreTranslateMessage(MSG *pMsg) override;
+	virtual BOOL OnInitDialog() override;
 	DECLARE_MESSAGE_MAP()
    public:
 	afx_msg void OnBnClickedButtonCalculaSomas();

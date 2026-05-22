@@ -24,16 +24,12 @@ void CCalcularSomasDialog::OnDestroy() {
 	if (GetParent()) GetParent()->PostMessage(WM_CALCULAR_SOMAS_CLOSED);
 }
 
-void CCalcularSomasDialog::OnLButtonDown(UINT nFlags, CPoint point) {
-	MessageBoxW(_T("Mostrar HELP! óú"), _T("HELP áéí"), MB_OK);
-	this->PostMessageW(WM_CLOSE);
-}
-
 void CCalcularSomasDialog::OnOK() {}
+
+void CCalcularSomasDialog::OnCancel() {}
 
 BEGIN_MESSAGE_MAP(CCalcularSomasDialog, CDialogEx)
 ON_WM_DESTROY()
-ON_WM_LBUTTONDOWN()
 ON_BN_CLICKED(IDC_BUTTON_CALCULA_SOMAS, &CCalcularSomasDialog::OnBnClickedButtonCalculaSomas)
 END_MESSAGE_MAP()
 
@@ -42,4 +38,36 @@ END_MESSAGE_MAP()
 void CCalcularSomasDialog::OnBnClickedButtonCalculaSomas() {
 	MessageBoxW(_T("Botão Calcular Somas"), _T("Calcular Somas apertado!"), MB_OK);
 	DestroyWindow();
+}
+
+BOOL CCalcularSomasDialog::PreTranslateMessage(MSG *pMsg) {
+	if (pMsg->message == WM_LBUTTONDOWN) {
+		TRACE("Mouse click received! hwnd=%p, dialog hwnd=%p\n", pMsg->hwnd, m_hWnd);
+	}
+	return CDialogEx::PreTranslateMessage(pMsg);
+}
+
+BOOL CCalcularSomasDialog::OnInitDialog() {
+	CDialogEx::OnInitDialog();
+
+	TRACE("=== CCalcularSomasDialog Diagnostics ===\n");
+	TRACE("Dialog HWND:       %p\n", m_hWnd);
+	TRACE("Parent HWND:       %p\n", GetParent()->GetSafeHwnd());
+	TRACE("Parent enabled:    %d\n", GetParent()->IsWindowEnabled());
+	TRACE("Dialog enabled:    %d\n", IsWindowEnabled());
+	TRACE("Dialog visible:    %d\n", IsWindowVisible());
+
+	LONG style = GetWindowLong(m_hWnd, GWL_STYLE);
+	TRACE("Has WS_CHILD:      %d\n", (style & WS_CHILD) != 0);
+	TRACE("Has WS_VISIBLE:    %d\n", (style & WS_VISIBLE) != 0);
+	TRACE("Has WS_DISABLED:   %d\n", (style & WS_DISABLED) != 0);
+
+	CRect rect;
+	GetWindowRect(&rect);
+	TRACE("Dialog screen rect: %d %d %d %d\n", rect.left, rect.top, rect.right, rect.bottom);
+
+	GetParent()->GetClientRect(&rect);
+	TRACE("Parent client rect: %d %d %d %d\n", rect.left, rect.top, rect.right, rect.bottom);
+
+	return TRUE;
 }

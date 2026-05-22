@@ -24,7 +24,7 @@ class CMainFrame : public CFrameWnd {
    public:
 	virtual BOOL PreCreateWindow(CREATESTRUCT &cs);
 	virtual BOOL OnCmdMsg(UINT nID, int nCode, void *pExtra, AFX_CMDHANDLERINFO *pHandlerInfo);
-
+	virtual BOOL PreTranslateMessage(MSG *pMsg);
 	// Implementation
    public:
 	virtual ~CMainFrame();
@@ -41,6 +41,7 @@ class CMainFrame : public CFrameWnd {
    protected:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnSetFocus(CWnd *pOldWnd);
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 
    private:
 	afx_msg LRESULT OnCalcularSomasClosed(WPARAM wParam, LPARAM lParam);

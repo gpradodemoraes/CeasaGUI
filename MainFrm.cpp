@@ -46,8 +46,18 @@ void CMainFrame::OnCalcularSomas() {
 		m_pCalcDlg = new CCalcularSomasDialog(this);
 		m_pCalcDlg->Create(IDD_SOMA_FORMVIEW, this);
 	}
+	// m_pCalcDlg->SetWindowPos(
+	// nullptr,
+	// 10, 10,          // X, Y — inside parent client area
+	// 700, 300,        // Width, Height
+	// SWP_NOZORDER | SWP_SHOWWINDOW
+	//);
+	// m_pCalcDlg->BringWindowToTop();
+	m_pCalcDlg->MoveWindow(0, 0, 278, 205);
 	m_pCalcDlg->ShowWindow(SW_SHOW);
-	m_pCalcDlg->SetForegroundWindow();
+	// m_pCalcDlg->SetFocus();
+	m_pCalcDlg->UpdateWindow();
+	// m_pCalcDlg->SetForegroundWindow();
 }
 
 void CMainFrame::OnShowHelp() {
@@ -126,6 +136,15 @@ void CMainFrame::OnSetFocus(CWnd * /*pOldWnd*/) {
 	m_wndView.SetFocus();
 }
 
+void CMainFrame::OnSize(UINT nType, int cx, int cy) {
+	CFrameWnd::OnSize(nType, cx, cy);
+
+	if (m_pCalcDlg && m_pCalcDlg->GetSafeHwnd()) {
+		// Fill the entire client area, or set specific bounds
+		m_pCalcDlg->MoveWindow(0, 0, cx, cy);
+	}
+}
+
 LRESULT CMainFrame::OnCalcularSomasClosed(WPARAM wParam, LPARAM lParam) {
 	delete m_pCalcDlg;
 	m_pCalcDlg = nullptr;
@@ -138,4 +157,19 @@ BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void *pExtra, AFX_CMDHANDLERINFO 
 
 	// otherwise, do default handling
 	return CFrameWnd::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
+}
+
+BOOL CMainFrame::PreTranslateMessage(MSG *pMsg) {
+	if (m_pCalcDlg && m_pCalcDlg->GetSafeHwnd()) {
+		// Let child dialog handle its own messages first
+		HWND hDialog = m_pCalcDlg->m_hWnd;
+
+		if (pMsg->hwnd == hDialog || ::IsChild(hDialog, pMsg->hwnd))
+		// if (::IsChild(m_pCalcDlg->m_hWnd, pMsg->hwnd) ||pMsg->hwnd == m_pCalcDlg->m_hWnd)
+		{
+			if (::IsDialogMessage(hDialog, pMsg)) return TRUE;
+		}
+	}
+
+	return CFrameWnd::PreTranslateMessage(pMsg);
 }
